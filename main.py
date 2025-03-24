@@ -40,13 +40,13 @@ class MyPlugin(BasePlugin):
             # 回复消息 "hello, <发送者id>!"
             ctx.add_return("reply", [f"id{id}"])
             download(id)
-
+            files_folder = 'D:\Documents\Workspace\JmPlugin\data'
             file_name = f'{id}.png'
 
             file_path = None
-            for file in os.listdir(self.files_folder):
+            for file in os.listdir(files_folder):
                 if file_name.lower() in file.lower():  # 不区分大小写
-                    file_path = os.path.join(self.files_folder, file)
+                    file_path = os.path.join(files_folder, file)
                     break
             
             # 检查是否找到文件
