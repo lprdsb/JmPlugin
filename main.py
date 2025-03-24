@@ -38,7 +38,7 @@ class MyPlugin(BasePlugin):
             self.ap.logger.debug(f"id{id}")
 
             # 回复消息 "hello, <发送者id>!"
-            ctx.add_return("reply", [f"id{id}"])
+            # ctx.add_return("reply", [f"id{id}"])
             download(id)
             files_folder = 'D:\Documents\Workspace\JmPlugin\data'
             file_name = f'{id}.png'
