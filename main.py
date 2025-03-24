@@ -7,7 +7,7 @@ from pkg.plugin.events import *  # 导入事件类
 
 
 # 注册插件
-@register(name="Hello", description="hello world", version="0.1", author="RockChinQ")
+@register(name="JM", description="hello world", version="0.1", author="RockChinQ")
 class MyPlugin(BasePlugin):
 
     # 插件加载时触发
