@@ -3,7 +3,7 @@ from pkg.plugin.events import *  # 导入事件类
 
 
 # 注册插件
-@register(name="Hello", description="hello world", version="0.1", author="RockChinQ")
+@register(name="JM", description="jm", version="0.1", author="RockChinQ")
 class MyPlugin(BasePlugin):
 
     # 插件加载时触发
@@ -18,10 +18,10 @@ class MyPlugin(BasePlugin):
     @handler(PersonNormalMessageReceived)
     async def person_normal_message_received(self, ctx: EventContext):
         msg = ctx.event.text_message  # 这里的 event 即为 PersonNormalMessageReceived 的对象
-        if msg == "hello":  # 如果消息为hello
+        if msg[:3] == "/jm":  # 如果消息为hello
 
             # 输出调试信息
-            self.ap.logger.debug("hello, {}".format(ctx.event.sender_id))
+            self.ap.logger.debug(f"id{int(msg[4:])}")
 
             # 回复消息 "hello, <发送者id>!"
             ctx.add_return("reply", ["hello, {}!".format(ctx.event.sender_id)])
