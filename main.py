@@ -1,6 +1,8 @@
 from pkg.plugin.context import register, handler, llm_func, BasePlugin, APIHost, EventContext
 from pkg.plugin.events import *  # 导入事件类
 import jm2pdf
+import os
+import pkg.platform.types as platform_types
 
 
 # 注册插件
@@ -27,7 +29,28 @@ class MyPlugin(BasePlugin):
 
             # 回复消息 "hello, <发送者id>!"
             ctx.add_return("reply", [f"id{id}"])
-            # jm2pdf.download(id)
+            jm2pdf.download(id)
+
+            file_name = f'{id}.png'
+
+            file_path = None
+            for file in os.listdir(self.files_folder):
+                if file_name.lower() in file.lower():  # 不区分大小写
+                    file_path = os.path.join(self.files_folder, file)
+                    break
+            
+            # 检查是否找到文件
+            if file_path and os.path.exists(file_path):
+                try:
+                    # 发送文件
+                    # await ctx.send_file(sender_id, file_path)
+                    file = platform_types.Image(path = file_path)
+                    ctx.add_return('reply', file)
+                    ctx.add_return("reply", ["文件已发送"])
+                except Exception as e:
+                    ctx.add_return("reply", ["发送文件时出错：" + str(e)])
+            else:
+                ctx.add_return("reply", ["未找到匹配的文件"])
             # await ctx.send_file(sender_id, f'D:\Documents\Workspace\JmPlugin\data\{id}.pdf')
 
             # 阻止该事件默认行为（向接口获取回复）

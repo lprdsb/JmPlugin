@@ -45,23 +45,23 @@ def download(id):
     config = "D:\Documents\Workspace\JmPlugin\config.yml"
     loadConfig = jmcomic.JmOption.from_file(config)
     # #如果需要下载，则取消以下注释
-    # manhua = [id]
-    # for id in manhua:
-    #     jmcomic.download_album(id,loadConfig)
+    manhua = [id]
+    for id in manhua:
+        jmcomic.download_album(id,loadConfig)
 
-    with open(config, "r", encoding="utf8") as f:
-        data = yaml.load(f, Loader=yaml.FullLoader)
-        path = data["dir_rule"]["base_dir"]
+    # with open(config, "r", encoding="utf8") as f:
+    #     data = yaml.load(f, Loader=yaml.FullLoader)
+    #     path = data["dir_rule"]["base_dir"]
 
-    with os.scandir(path) as entries:
-        for entry in entries:
-            if entry.is_dir():
-                if os.path.exists(os.path.join(path +'/' +entry.name + ".pdf")):
-                    print("文件：《%s》 已存在，跳过" % entry.name)
-                    continue
-                else:
-                    print("开始转换：%s " % entry.name)
-                    all2PDF(path, entry.name)
+    # with os.scandir(path) as entries:
+    #     for entry in entries:
+    #         if entry.is_dir():
+    #             if os.path.exists(os.path.join(path +'/' +entry.name + ".pdf")):
+    #                 print("文件：《%s》 已存在，跳过" % entry.name)
+    #                 continue
+    #             else:
+    #                 print("开始转换：%s " % entry.name)
+    #                 all2PDF(path, entry.name)
 
 
 if __name__ == '__main__':

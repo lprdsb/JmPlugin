@@ -22,7 +22,12 @@ download:
     # PS: 禁漫网页一般是一次请求50张图
     batch_count: 45
 
-# plugins:
+plugins:
+  after_photo:
+    - plugin: long_img
+      kwargs:
+        img_dir: D:\Documents\Workspace\JmPlugin\data # 长图存放文件夹
+        filename_rule: Pid # 长图命名规则，同上
 #   after_album:
 #     # 把章节的所有图片合并为一个pdf的插件
 #     # 使用前需要安装依赖库: [pip install img2pdf]
