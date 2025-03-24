@@ -71,6 +71,13 @@ class MyPlugin(BasePlugin):
     async def group_normal_message_received(self, ctx: EventContext):
         msg = ctx.event.text_message  # 这里的 event 即为 PersonNormalMessageReceived 的对象
         sender_id = ctx.event.sender_id
+        if msg == "hello":  # 如果消息为hello
+
+            # 输出调试信息
+            self.ap.logger.debug("hello, {}".format(ctx.event.sender_id))
+
+            # 回复消息 "hello, everyone!"
+            ctx.add_return("reply", ["hello, everyone!"])
         if msg[:3] == "/jm":  # 如果消息为hello
             id = int(msg[4:])
             # 输出调试信息
