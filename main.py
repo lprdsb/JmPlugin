@@ -24,7 +24,7 @@ class MyPlugin(BasePlugin):
             self.ap.logger.debug(f"id{int(msg[4:])}")
 
             # 回复消息 "hello, <发送者id>!"
-            ctx.add_return("reply", ["hello, {}!".format(ctx.event.sender_id)])
+            ctx.add_return("reply", [f"id{int(msg[4:])}"])
 
             # 阻止该事件默认行为（向接口获取回复）
             ctx.prevent_default()
