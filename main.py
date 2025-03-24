@@ -1,9 +1,19 @@
 from pkg.plugin.context import register, handler, llm_func, BasePlugin, APIHost, EventContext
 from pkg.plugin.events import *  # 导入事件类
-import jm2pdf
+# import jm2pdf
 import os
 import pkg.platform.types as platform_types
+import jmcomic, os, time, yaml
 
+
+def download(id):
+    # 自定义设置：
+    config = "D:\Documents\Workspace\JmPlugin\config.yml"
+    loadConfig = jmcomic.JmOption.from_file(config)
+    # #如果需要下载，则取消以下注释
+    manhua = [id]
+    for id in manhua:
+        jmcomic.download_album(id,loadConfig)
 
 # 注册插件
 @register(name="JM", description="jm", version="0.1", author="RockChinQ")
@@ -29,7 +39,7 @@ class MyPlugin(BasePlugin):
 
             # 回复消息 "hello, <发送者id>!"
             ctx.add_return("reply", [f"id{id}"])
-            jm2pdf.download(id)
+            download(id)
 
             file_name = f'{id}.png'
 
