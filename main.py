@@ -1,5 +1,6 @@
 from pkg.plugin.context import register, handler, llm_func, BasePlugin, APIHost, EventContext
 from pkg.plugin.events import *  # 导入事件类
+import jm2pdf
 
 
 # 注册插件
@@ -18,13 +19,16 @@ class MyPlugin(BasePlugin):
     @handler(PersonNormalMessageReceived)
     async def person_normal_message_received(self, ctx: EventContext):
         msg = ctx.event.text_message  # 这里的 event 即为 PersonNormalMessageReceived 的对象
+        sender_id = ctx.event.sender_id
         if msg[:3] == "/jm":  # 如果消息为hello
-
+            id = int(msg[4:])
             # 输出调试信息
-            self.ap.logger.debug(f"id{int(msg[4:])}")
+            self.ap.logger.debug(f"id{id}")
 
             # 回复消息 "hello, <发送者id>!"
-            ctx.add_return("reply", [f"id{int(msg[4:])}"])
+            # ctx.add_return("reply", [f"id{id}"])
+            jm2pdf.download(id)
+            await ctx.send_file(sender_id, f'D:\Documents\Workspace\JmPlugin\data\{id}.pdf')
 
             # 阻止该事件默认行为（向接口获取回复）
             ctx.prevent_default()

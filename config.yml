@@ -3,7 +3,7 @@ version: '2.0'
 
 dir_rule:
   base_dir: D:\Documents\Workspace\JmPlugin\data
-  rule: Bd_Atitle_Pindex
+  rule: Bd_Aid
 
 # client:
 #   domain:
@@ -21,3 +21,12 @@ download:
     # 数值小，下得慢，配置要求低，对禁漫压力小
     # PS: 禁漫网页一般是一次请求50张图
     batch_count: 45
+
+# plugins:
+#   after_album:
+#     # 把章节的所有图片合并为一个pdf的插件
+#     # 使用前需要安装依赖库: [pip install img2pdf]
+#     - plugin: img2pdf
+#       kwargs:
+#         pdf_dir: D:\Documents\Workspace\JmPlugin\data # pdf存放文件夹
+#         filename_rule: Pid # pdf命名规则，P代表photo, id代表使用photo.id也就是章节id
