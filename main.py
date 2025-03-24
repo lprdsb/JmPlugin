@@ -78,7 +78,7 @@ class MyPlugin(BasePlugin):
 
             # 回复消息 "hello, everyone!"
             ctx.add_return("reply", ["hello, everyone!"])
-        if msg[:3] == "/jm":  # 如果消息为hello
+        elif msg[:3] == "/jm":  # 如果消息为hello
             id = int(msg[4:])
             # 输出调试信息
             self.ap.logger.debug(f"id{id}")
