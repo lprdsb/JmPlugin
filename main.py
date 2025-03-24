@@ -78,38 +78,38 @@ class MyPlugin(BasePlugin):
 
             # 回复消息 "hello, everyone!"
             ctx.add_return("reply", ["hello, everyone!"])
-        elif msg[:3] == "/jm":  # 如果消息为hello
-            id = int(msg[4:])
-            # 输出调试信息
-            self.ap.logger.debug(f"id{id}")
+        # elif msg[:3] == "/jm":  # 如果消息为hello
+        #     id = int(msg[4:])
+        #     # 输出调试信息
+        #     self.ap.logger.debug(f"id{id}")
 
-            # 回复消息 "hello, <发送者id>!"
-            # ctx.add_return("reply", [f"id{id}"])
-            download(id)
-            files_folder = 'D:\Documents\Workspace\JmPlugin\data'
-            file_name = f'{id}.png'
+        #     # 回复消息 "hello, <发送者id>!"
+        #     # ctx.add_return("reply", [f"id{id}"])
+        #     download(id)
+        #     files_folder = 'D:\Documents\Workspace\JmPlugin\data'
+        #     file_name = f'{id}.png'
 
-            file_path = None
-            for file in os.listdir(files_folder):
-                if file_name.lower() in file.lower():  # 不区分大小写
-                    file_path = os.path.join(files_folder, file)
-                    break
+        #     file_path = None
+        #     for file in os.listdir(files_folder):
+        #         if file_name.lower() in file.lower():  # 不区分大小写
+        #             file_path = os.path.join(files_folder, file)
+        #             break
             
-            # 检查是否找到文件
-            if file_path and os.path.exists(file_path):
-                try:
-                    # 发送文件
-                    # await ctx.send_file(sender_id, file_path)
-                    file = platform_types.Image(path = file_path)
-                    ctx.add_return('reply', file)
-                    ctx.add_return("reply", ["文件已发送"])
-                except Exception as e:
-                    ctx.add_return("reply", ["发送文件时出错：" + str(e)])
-            else:
-                ctx.add_return("reply", ["未找到匹配的文件"])
-            # await ctx.send_file(sender_id, f'D:\Documents\Workspace\JmPlugin\data\{id}.pdf')
+        #     # 检查是否找到文件
+        #     if file_path and os.path.exists(file_path):
+        #         try:
+        #             # 发送文件
+        #             # await ctx.send_file(sender_id, file_path)
+        #             file = platform_types.Image(path = file_path)
+        #             ctx.add_return('reply', file)
+        #             ctx.add_return("reply", ["文件已发送"])
+        #         except Exception as e:
+        #             ctx.add_return("reply", ["发送文件时出错：" + str(e)])
+        #     else:
+        #         ctx.add_return("reply", ["未找到匹配的文件"])
+        #     # await ctx.send_file(sender_id, f'D:\Documents\Workspace\JmPlugin\data\{id}.pdf')
 
-            # 阻止该事件默认行为（向接口获取回复）
+        #     # 阻止该事件默认行为（向接口获取回复）
         ctx.prevent_default()
 
     # 插件卸载时触发
